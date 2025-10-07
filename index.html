@@ -4,403 +4,358 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Project Turbo — Team</title>
-
-<!-- Theme colors -->
 <style>
   :root{
-    --purple:#732994;   /* main accent */
-    --dark:#232323;     /* background */
-    --pink:#E5009E;     /* highlight */
+    --dark:#232323;
+    --panel:#2b2b2b;
+    --muted:#bfbfbf;
+    --accent:#E5009E;
     --white:#ffffff;
-    --muted: #bcbcbc;
-    --radius: 12px;
-    --max-width: 1100px;
-    --glass: rgba(255,255,255,0.03);
+    --glass: rgba(255,255,255,0.02);
+    --maxw:1100px;
+    --radius:12px;
   }
-
-  /* Reset & layout */
   *{box-sizing:border-box}
   html,body{height:100%}
   body{
-    margin:0;
-    font-family: Inter,Segoe UI,Roboto,-apple-system,"Helvetica Neue",Arial;
-    background: linear-gradient(180deg,var(--dark) 0%, #1f1f1f 100%);
+    margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial;
+    background:linear-gradient(180deg,var(--dark) 0%, #1f1f1f 100%);
     color:var(--white);
     -webkit-font-smoothing:antialiased;
     -moz-osx-font-smoothing:grayscale;
-    display:flex;
-    align-items:flex-start;
-    justify-content:center;
-    padding:24px;
+    display:flex;align-items:flex-start;justify-content:center;padding:20px;
   }
 
-  .container{
-    width:100%;
-    max-width:var(--max-width);
-    background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02));
-    border-radius:16px;
-    box-shadow: 0 6px 30px rgba(0,0,0,0.6);
-    overflow:hidden;
-    border: 1px solid rgba(255,255,255,0.03);
+  /* container */
+  .wrap{
+    width:100%;max-width:var(--maxw);border-radius:14px;overflow:hidden;
+    background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.02));
+    border:1px solid rgba(255,255,255,0.03);box-shadow:0 12px 40px rgba(0,0,0,0.6);
   }
 
-  /* Header / nav */
-  header{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:18px 28px;
-    background: linear-gradient(90deg, rgba(115,41,148,0.06), rgba(229,0,158,0.03));
-    gap:12px;
-  }
-  .brand{
-    display:flex;
-    gap:12px;
-    align-items:center;
-  }
-  .logo {
-    width:56px;height:56px;
-    border-radius:10px;
-    background: linear-gradient(135deg,var(--purple),var(--pink));
-    display:grid;place-items:center;
-    color:var(--white);
-    font-weight:800;
-    font-size:18px;
-    box-shadow: 0 6px 18px rgba(115,41,148,0.22);
-  }
-  .brand h1{font-size:18px;margin:0}
-  .brand p{margin:0;font-size:12px;color:var(--muted)}
+  /* header */
+  header{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;background:transparent}
+  .brand{display:flex;align-items:center;gap:12px}
+  .logo{width:48px;height:48px;border-radius:10px;background:linear-gradient(135deg,#732994, #E5009E);display:grid;place-items:center;font-weight:800}
+  .brand h1{font-size:16px;margin:0}
+  nav{display:flex;gap:8px;align-items:center}
 
-  nav{
-    display:flex;gap:8px;align-items:center;
+  .nav-link{
+    padding:8px 12px;border-radius:9px;background:transparent;color:var(--muted);border:none;cursor:pointer;font-weight:600;
   }
+  .nav-link:hover{color:var(--white);background:rgba(255,255,255,0.02)}
 
-  /* Tab buttons */
-  .tab-btn{
-    background:transparent;
-    color:var(--muted);
-    border:none;
-    padding:10px 14px;
-    border-radius:10px;
-    cursor:pointer;
-    font-weight:600;
-    transition: all .18s ease;
-    font-size:14px;
+  /* hamburger for mobile */
+  .hamburger{display:none;border:none;background:transparent;color:var(--muted);font-size:22px;padding:8px;cursor:pointer}
+  .hamburger.active{color:var(--white)}
+  /* mobile nav overlay */
+  .mobile-menu{
+    position:fixed;inset:0;display:none;align-items:center;justify-content:center;
+    background:rgba(0,0,0,0.6);z-index:1400;
   }
-  .tab-btn:hover{transform:translateY(-2px)}
-  .tab-btn.active{
-    color:var(--white);
-    background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(0,0,0,0.03));
-    box-shadow: 0 6px 14px rgba(115,41,148,0.12);
-    border: 1px solid rgba(115,41,148,0.08);
-  }
+  .mobile-menu .panel{width:90%;max-width:420px;background:var(--panel);padding:22px;border-radius:14px}
+  .mobile-menu .panel button{display:block;width:100%;text-align:left;margin:10px 0;padding:14px;border-radius:10px;background:transparent;color:var(--white);border:1px solid rgba(255,255,255,0.03)}
 
-  /* Main content */
-  main{padding:28px;display:block;min-height:560px}
-  .pane{display:none;animation:fade .28s ease both}
-  .pane.active{display:block}
-
-  @keyframes fade{
-    from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:none}
-  }
-
-  /* Home hero */
-  .hero{
-    display:flex;
-    gap:20px;
-    align-items:center;
-    justify-content:space-between;
-    background: linear-gradient(90deg, rgba(115,41,148,0.04), rgba(229,0,158,0.02));
-    padding:22px;border-radius:12px;
-    margin-bottom:18px;
-    border:1px solid rgba(255,255,255,0.02);
-  }
+  /* main */
+  main{padding:18px}
+  .hero{padding:18px;border-radius:12px;background:linear-gradient(90deg, rgba(255,255,255,0.015), rgba(0,0,0,0.02));display:flex;justify-content:space-between;gap:12px;align-items:center;border:1px solid rgba(255,255,255,0.02)}
   .hero-left h2{margin:0;font-size:20px}
   .hero-left p{margin:6px 0 0;color:var(--muted)}
-  .hero-shape{
-    width:180px;height:80px;border-radius:12px;
-    background: linear-gradient(135deg,var(--dark), rgba(35,35,35,0.9));
-    clip-path: polygon(0 0, 100% 0, 85% 100%, 0 100%);
-    display:flex;align-items:center;justify-content:center;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
-  }
-  .hero-shape small{color:var(--muted);font-size:12px}
 
-  /* Team grid */
-  .team-grid{
-    display:grid;
-    grid-template-columns: repeat(auto-fill,minmax(220px,1fr));
-    gap:18px;
-    margin-top:14px;
-  }
-  .card{
-    background:var(--glass);
-    border-radius:12px;padding:14px;
-    display:flex;gap:12px;align-items:center;
-    border:1px solid rgba(255,255,255,0.02);
-    transition: transform .14s ease, box-shadow .14s ease;
-  }
-  .card:hover{transform:translateY(-6px); box-shadow: 0 10px 30px rgba(0,0,0,0.6);}
-
-  .avatar{
-    width:72px;height:72px;border-radius:10px;
-    flex:0 0 72px;display:grid;place-items:center;
-    font-weight:700;font-size:20px;
-    color:var(--white);
-    background: linear-gradient(135deg,var(--purple), var(--pink));
-    box-shadow: 0 8px 20px rgba(115,41,148,0.18);
-  }
-
-  .member-info{flex:1}
-  .member-info h3{margin:0;font-size:16px}
+  /* grid */
+  .grid{display:grid;grid-template-columns: repeat(auto-fill,minmax(240px,1fr));gap:16px;margin-top:16px}
+  .card{background:var(--glass);padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,0.02);display:flex;gap:12px;align-items:center;cursor:pointer;transition:transform .14s ease,box-shadow .14s ease}
+  .card:hover{transform:translateY(-6px);box-shadow:0 12px 30px rgba(0,0,0,0.6)}
+  .avatar{width:64px;height:64px;border-radius:10px;display:grid;place-items:center;font-weight:700;font-size:18px;background:linear-gradient(135deg,#732994,#E5009E);color:var(--white);flex:0 0 64px}
+  .member-info h3{margin:0;font-size:15px}
   .member-info p{margin:6px 0 0;color:var(--muted);font-size:13px}
 
-  /* Sponsors simple list */
-  .sponsors{
-    display:flex;flex-direction:column;gap:12px;
-    margin-top:8px;
-  }
-  .sponsor-pill{
-    padding:10px 12px;border-radius:999px;background:rgba(255,255,255,0.02);
-    display:inline-block;color:var(--muted);font-weight:600;border:1px solid rgba(255,255,255,0.02);
-  }
+  .sponsor-logo{width:64px;height:64px;border-radius:8px;background:rgba(255,255,255,0.02);display:grid;place-items:center;color:var(--muted);font-weight:700}
 
-  /* Contact */
-  .contact-card{display:grid;grid-template-columns:1fr 320px;gap:18px}
-  .contact-card .card{padding:20px}
-  .contact-form label{display:block;font-size:13px;color:var(--muted);margin-bottom:6px}
-  .contact-form input, .contact-form textarea{
-    width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);
-    background:rgba(255,255,255,0.02);color:var(--white);
-    outline:none;font-size:14px;margin-bottom:12px;
-  }
-  .btn{
-    display:inline-block;padding:10px 14px;border-radius:10px;border:none;
-    cursor:pointer;background:linear-gradient(90deg,var(--purple),var(--pink));
-    color:var(--white);font-weight:700;
-    box-shadow: 0 8px 18px rgba(115,41,148,0.18);
-  }
+  /* modal (floating island) */
+  .overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center;z-index:1500;padding:20px}
+  .modal{width:100%;max-width:760px;background:var(--panel);border-radius:14px;padding:18px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 20px 60px rgba(0,0,0,0.7)}
+  .modal .close{background:transparent;border:none;color:var(--muted);font-weight:700;cursor:pointer;font-size:16px}
+  .modal .head{display:flex;gap:12px;align-items:center}
+  .modal img.logo{width:100px;height:100px;object-fit:cover;border-radius:10px;background:rgba(255,255,255,0.02)}
+  .modal h3{margin:0}
+  .modal p{color:var(--muted);margin-top:10px}
 
-  /* Footer */
-  footer{padding:14px 28px;background:transparent;color:var(--muted);font-size:13px;text-align:center}
+  /* contact area inside modal */
+  .contact-grid{display:grid;grid-template-columns:1fr 280px;gap:12px}
+  .contact-grid input, .contact-grid textarea{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);background:rgba(255,255,255,0.02);color:var(--white)}
 
-  /* Responsive tweaks */
+  /* footer */
+  footer{padding:14px 18px;color:var(--muted);text-align:center;font-size:13px}
+
+  /* utilities */
+  .muted{color:var(--muted);font-size:13px}
+  .btn{display:inline-block;padding:10px 12px;border-radius:9px;border:none;background:linear-gradient(90deg,#732994,#E5009E);color:var(--white);font-weight:700;cursor:pointer}
+
+  /* responsive */
   @media (max-width:820px){
-    .contact-card{grid-template-columns:1fr}
-    header{padding:14px}
-    .hero-shape{display:none}
+    .grid{grid-template-columns:repeat(auto-fill,minmax(170px,1fr))}
+    .contact-grid{grid-template-columns:1fr}
+    nav{display:none}
+    .hamburger{display:block}
+    .brand h1{font-size:15px}
   }
 </style>
 </head>
 <body>
-  <div class="container" role="application" aria-label="Project Turbo team website">
-    <header>
-      <div class="brand">
-        <div class="logo" aria-hidden="true">PT</div>
-        <div>
-          <h1>Project Turbo</h1>
-          <p>F1 in Schools — Team Profile</p>
+<div class="wrap" role="application" aria-label="Project Turbo website">
+  <header>
+    <div class="brand">
+      <div class="logo" aria-hidden="true">PT</div>
+      <div>
+        <h1>Project Turbo</h1>
+        <div class="muted">F1 in Schools — Team</div>
+      </div>
+    </div>
+
+    <nav aria-label="Main navigation">
+      <button class="nav-link" data-nav="home">Home</button>
+      <button class="nav-link" data-nav="team">Team</button>
+      <button class="nav-link" data-nav="sponsors">Sponsors</button>
+      <button class="nav-link" data-nav="about">About</button>
+      <button class="nav-link" data-nav="contact">Contact</button>
+    </nav>
+
+    <button class="hamburger" aria-label="Open menu" title="Menu">☰</button>
+  </header>
+
+  <!-- mobile menu overlay -->
+  <div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true">
+    <div class="panel" role="document">
+      <button data-nav="home">Home</button>
+      <button data-nav="team">Team</button>
+      <button data-nav="sponsors">Sponsors</button>
+      <button data-nav="about">About</button>
+      <button data-nav="contact">Contact</button>
+      <div style="text-align:right;margin-top:10px"><button class="btn" id="mobileClose">Close</button></div>
+    </div>
+  </div>
+
+  <main id="main" tabindex="-1">
+    <!-- home -->
+    <section id="homeView">
+      <div class="hero">
+        <div class="hero-left">
+          <h2>Welcome to Project Turbo</h2>
+          <p class="muted">We design, build and race model F1 cars — teamwork, engineering, and creativity.</p>
+        </div>
+        <div style="text-align:right">
+          <button class="btn" id="openAbout">About</button>
         </div>
       </div>
 
-      <nav role="navigation" aria-label="Main">
-        <button class="tab-btn active" data-target="home">Home</button>
-        <button class="tab-btn" data-target="team">Team</button>
-        <button class="tab-btn" data-target="sponsors">Sponsors</button>
-        <button class="tab-btn" data-target="contact">Contact</button>
-      </nav>
-    </header>
+      <h3 style="margin-top:18px;color:var(--white)">Quick links</h3>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:8px">
+        <button class="card" id="quickTeam"><div style="display:flex;align-items:center;gap:12px"><div class="avatar">TT</div><div><strong>Team</strong><div class="muted">Meet the members</div></div></div></button>
+        <button class="card" id="quickSponsors"><div style="display:flex;align-items:center;gap:12px"><div class="sponsor-logo">SP</div><div><strong>Sponsors</strong><div class="muted">Our partners</div></div></div></button>
+      </div>
+    </section>
 
-    <main>
-      <!-- HOME -->
-      <section id="home" class="pane active" role="region" aria-labelledby="home-title">
-        <div class="hero" aria-hidden="false">
-          <div class="hero-left">
-            <h2 id="home-title">Welcome to Project Turbo</h2>
-            <p>We design, build and race miniature F1 cars — powered by teamwork, creativity and engineering.</p>
-          </div>
-          <div class="hero-shape">
-            <small>Team colors: <strong style="color:var(--white)">#732994</strong>, <strong style="color:var(--white)">#232323</strong>, <strong style="color:var(--white)">#E5009E</strong></small>
-          </div>
+    <!-- team -->
+    <section id="teamView" style="display:none">
+      <h2 style="margin:0 0 12px 0">Team Members</h2>
+      <div class="grid" id="teamGrid" aria-live="polite"></div>
+    </section>
+
+    <!-- sponsors -->
+    <section id="sponsorsView" style="display:none">
+      <h2 style="margin:0 0 12px 0">Sponsors & Partners</h2>
+      <div class="grid" id="sponsorsGrid"></div>
+    </section>
+
+    <!-- about -->
+    <section id="aboutView" style="display:none">
+      <h2 style="margin:0 0 12px 0">About Project Turbo</h2>
+      <div class="card" style="display:block;cursor:auto">
+        <div style="padding:8px 0">
+          <p class="muted">Project Turbo is a student-run F1 in Schools team focusing on STEM, CAD/CAM, manufacturing, and outreach. We train to build efficient cars and represent innovation at competitions.</p>
         </div>
+      </div>
+    </section>
 
-        <section aria-label="Quick info" style="display:flex;gap:12px;flex-wrap:wrap">
-          <div class="card" style="flex:1;min-width:220px">
-            <div style="flex:1">
-              <h3 style="margin:0 0 6px 0">About</h3>
-              <p style="margin:0;color:var(--muted)">Student-led F1 in Schools team focusing on STEM, CAD, CAM and entrepreneurship.</p>
-            </div>
-            <div style="text-align:right;min-width:80px">
-              <span style="display:inline-block;padding:6px 10px;border-radius:8px;background:rgba(255,255,255,0.02);font-weight:700;color:var(--muted)">UAE Nationals</span>
-            </div>
-          </div>
-
-          <div class="card" style="flex:1;min-width:220px">
-            <div>
-              <h3 style="margin:0 0 6px 0">Contact</h3>
-              <p style="margin:0;color:var(--muted)">sponsorships@project-turbo.xyz • (02) 445 3169</p>
-            </div>
-          </div>
-        </section>
-      </section>
-
-      <!-- TEAM -->
-      <section id="team" class="pane" role="region" aria-labelledby="team-title">
-        <h2 id="team-title" style="margin:0 0 12px 0;color:var(--purple)">Team Members</h2>
-
-        <!-- Team grid -->
-        <div class="team-grid" id="teamGrid" aria-live="polite">
-          <!-- Cards generated by JS -->
+    <!-- contact -->
+    <section id="contactView" style="display:none">
+      <h2 style="margin:0 0 12px 0">Contact</h2>
+      <div class="card" style="display:block;cursor:auto">
+        <div style="flex:1">
+          <p class="muted">For sponsorships: <strong>sponsorships@project-turbo.xyz</strong></p>
+          <p class="muted">Phone: <strong>(02) 445 3169</strong> (may not always be answered)</p>
         </div>
-      </section>
+      </div>
+    </section>
+  </main>
 
-      <!-- SPONSORS -->
-      <section id="sponsors" class="pane" role="region" aria-labelledby="sponsors-title">
-        <h2 id="sponsors-title" style="margin:0 0 12px 0;color:var(--purple)">Sponsors & Partners</h2>
+  <footer>Project Turbo • F1 in Schools</footer>
+</div>
 
-        <p style="color:var(--muted);margin:0 0 12px 0">We appreciate the support of our sponsors. Reach out if you'd like to partner with Project Turbo.</p>
-
-        <div class="sponsors" id="sponsorsList">
-          <!-- Sponsor pills populated by JS -->
+<!-- Floating modal overlay -->
+<div class="overlay" id="overlay" aria-hidden="true">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <div class="head">
+        <img class="logo" id="modalImage" alt="" style="display:none">
+        <div>
+          <h3 id="modalTitle"></h3>
+          <div class="muted" id="modalSubtitle"></div>
         </div>
-      </section>
+      </div>
+      <div>
+        <button class="close" id="modalClose">Close ✕</button>
+      </div>
+    </div>
+    <p id="modalBody" class="muted" style="margin-top:12px"></p>
 
-      <!-- CONTACT -->
-      <section id="contact" class="pane" role="region" aria-labelledby="contact-title">
-        <h2 id="contact-title" style="margin:0 0 12px 0;color:var(--purple)">Contact Us</h2>
-
-        <div class="contact-card">
-          <div class="card">
-            <div style="flex:1">
-              <h3 style="margin-top:0">Get in touch</h3>
-              <p style="color:var(--muted)">For sponsorships: <strong>sponsorships@project-turbo.xyz</strong></p>
-              <p style="color:var(--muted)">Phone: <strong>(02) 445 3169</strong> (may not always be answered)</p>
-
-              <div style="margin-top:12px">
-                <a class="btn" href="mailto:sponsorships@project-turbo.xyz">Email Sponsorships</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="card">
-            <div>
-              <h3 style="margin:0 0 8px 0">Quick Message</h3>
-              <form id="contactForm" class="contact-form" onsubmit="event.preventDefault(); alert('Thanks! Message sending is not configured in this demo.');">
-                <label for="name">Name</label>
-                <input id="name" type="text" placeholder="Your name" required>
-                <label for="message">Message</label>
-                <textarea id="message" rows="5" placeholder="Type your message..." required></textarea>
-                <button class="btn" type="submit">Send</button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <footer>
-      <small>Project Turbo • F1 in Schools • Built for demo. Replace placeholder images with real headshots in /headshots/</small>
-    </footer>
+    <!-- optional contact form inside modal for contact -->
+    <div id="modalExtra" style="margin-top:12px"></div>
   </div>
+</div>
 
 <script>
-/*
-  Team data: edit this array to add/remove members.
-  For headshots, put files in /headshots/ with filenames like "john-doe.jpg".
-  If you don't add an image, the code will show an initial avatar.
-*/
+/* ---------- DATA ---------- */
 const TEAM = [
-  {name:"Alex (Team Lead)", role:"Team Leader & CAD Lead", photo:"headshots/alex.jpg"},
-  {name:"Max Atticus", role:"Aerodynamics Engineer", photo:"headshots/max.jpg"},
-  {name:"Eli Agam", role:"Manufacturing & CNC", photo:"headshots/eli.jpg"},
-  {name:"Jayden Gavriil", role:"Strategy & Data", photo:"headshots/jayden.jpg"},
-  {name:"Leo Mitilesh", role:"Marketing & Outreach", photo:"headshots/leo.jpg"},
-  {name:"Zaid", role:"Team Mechanic / Driver", photo:"headshots/zaid.jpg"}
+  {name:"Harrison Ding", role:"Team Leader", photo:"headshots/harrison.jpg", bio:"Harrison leads Project Turbo and coordinates engineering and strategy."},
+  {name:"Alexander Verschueren", role:"Sponsorship & Tech Team", photo:"headshots/alexander.jpg", bio:"Handles sponsorship relationships and assists with technical systems."},
+  {name:"Eri Omonigho", role:"Sponsorship Team", photo:"headshots/eri.jpg", bio:"Manages sponsor communications and outreach."},
+  {name:"Ana Macário", role:"Team Identity & Branding", photo:"headshots/ana.jpg", bio:"Leads visual identity, branding, and team presence."},
+  {name:"Artem", role:"Team Identity", photo:"headshots/artem.jpg", bio:"Supports branding, graphics, and presentation design."},
+  {name:"Member Coming Soon", role:"Placeholder", photo:"", bio:"We will announce this member shortly."}
 ];
 
 const SPONSORS = [
-  "Company A",
-  "Company B",
-  "Local Workshop",
-  "School STEM Dept"
+  {name:"Company A", logo:"sponsors/company-a.png", desc:"Company A supports STEM education and engineering projects."},
+  {name:"Company B", logo:"sponsors/company-b.png", desc:"Company B provides technical mentorship and material support."},
+  {name:"Local Workshop", logo:"sponsors/local-workshop.png", desc:"Local Workshop helps with manufacturing and testing."}
 ];
 
-/* tab navigation */
-document.querySelectorAll('.tab-btn').forEach(btn=>{
-  btn.addEventListener('click', ()=> {
-    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
-
-    const target = btn.dataset.target;
-    document.querySelectorAll('.pane').forEach(p=>{
-      p.classList.toggle('active', p.id===target);
-    });
-
-    // Update focus for accessibility
-    const pane = document.getElementById(target);
-    if(pane) pane.setAttribute('tabindex','-1'), pane.focus();
-  });
-});
-
-/* render team */
-function makeInitials(name){
-  return name.split(' ').map(s=>s[0]).slice(0,2).join('').toUpperCase();
+/* ---------- NAV & MOBILE ---------- */
+function showView(id){
+  document.querySelectorAll('main > section').forEach(s=>s.style.display='none');
+  document.getElementById(id+'View').style.display='block';
+  // close mobile menu if open
+  closeMobileMenu();
+  // focus for a11y
+  document.getElementById(id+'View').setAttribute('tabindex','-1');
+  document.getElementById(id+'View').focus();
 }
-const grid = document.getElementById('teamGrid');
-TEAM.forEach(member=>{
-  const card = document.createElement('article');
-  card.className = 'card';
-  // avatar (use <img> if file found by user)
-  const avatar = document.createElement('div');
-  avatar.className='avatar';
+document.querySelectorAll('[data-nav]').forEach(btn=>{
+  btn.addEventListener('click', ()=> showView(btn.dataset.nav));
+});
+document.querySelectorAll('.nav-link').forEach(b=> b.addEventListener('click', ()=> showView(b.dataset.nav)));
 
-  // Try to use photo if exists (we can't check server files here), but include img tag for users
-  const img = document.createElement('img');
-  img.alt = member.name + ' headshot';
-  img.loading = 'lazy';
-  img.style.width='72px';
-  img.style.height='72px';
-  img.style.objectFit='cover';
-  img.style.borderRadius='8px';
-  // If user adds photos, they should match member.photo path. Otherwise, we use initials:
-  img.src = member.photo; // non-existing src will show broken image — replace with actual files
-  img.onerror = function(){
-    // fallback to initials visual
-    img.remove();
-    avatar.textContent = makeInitials(member.name);
-  };
+const hamburger = document.querySelector('.hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+hamburger.addEventListener('click', ()=>{
+  hamburger.classList.toggle('active');
+  mobileMenu.style.display = mobileMenu.style.display === 'flex' ? 'none' : 'flex';
+});
+document.getElementById('mobileClose').addEventListener('click', closeMobileMenu);
+function closeMobileMenu(){ mobileMenu.style.display='none'; hamburger.classList.remove('active'); }
 
-  avatar.appendChild(img);
-  card.appendChild(avatar);
+/* quick buttons */
+document.getElementById('quickTeam').addEventListener('click', ()=> showView('team'));
+document.getElementById('quickSponsors').addEventListener('click', ()=> showView('sponsors'));
+document.getElementById('openAbout').addEventListener('click', ()=> openModal('about', 'About Project Turbo', 'Project Turbo is a student-run F1 in Schools team focusing on STEM and design.'))
 
-  const info = document.createElement('div');
-  info.className='member-info';
-  const h3 = document.createElement('h3'); h3.textContent=member.name;
-  const p = document.createElement('p'); p.textContent=member.role;
-
-  info.appendChild(h3);
-  info.appendChild(p);
-  card.appendChild(info);
-  grid.appendChild(card);
+/* ---------- RENDER TEAM & SPONSORS ---------- */
+const teamGrid = document.getElementById('teamGrid');
+function initials(name){
+  return name.split(' ').map(n=>n[0]).slice(0,2).join('').toUpperCase();
+}
+TEAM.forEach((m, idx)=>{
+  const c = document.createElement('button');
+  c.className = 'card';
+  c.type = 'button';
+  c.setAttribute('aria-haspopup','dialog');
+  c.innerHTML = `<div class="avatar">${initials(m.name)}</div>
+                 <div class="member-info"><h3>${m.name}</h3><p>${m.role}</p></div>`;
+  c.addEventListener('click', ()=> openModal('member', m.name, m.bio, {image:m.photo, subtitle:m.role}));
+  teamGrid.appendChild(c);
 });
 
-/* render sponsors */
-const spList = document.getElementById('sponsorsList');
+const sponsorsGrid = document.getElementById('sponsorsGrid');
 SPONSORS.forEach(s=>{
-  const span = document.createElement('span');
-  span.className='sponsor-pill';
-  span.textContent = s;
-  spList.appendChild(span);
+  const c = document.createElement('button');
+  c.className='card';
+  c.type='button';
+  c.innerHTML = `<div class="sponsor-logo">${s.name.split(' ').map(x=>x[0]).slice(0,2).join('')}</div>
+                 <div style="flex:1"><h3>${s.name}</h3><div class="muted">${s.desc}</div></div>`;
+  c.addEventListener('click', ()=> openModal('sponsor', s.name, s.desc, {image:s.logo}));
+  sponsorsGrid.appendChild(c);
 });
 
-/* Accessibility: keyboard nav for tabs (left/right) */
-const tabs = Array.from(document.querySelectorAll('.tab-btn'));
-tabs.forEach((t, idx)=>{
-  t.addEventListener('keydown', (e)=>{
-    if(e.key==='ArrowRight'){ tabs[(idx+1)%tabs.length].focus(); }
-    if(e.key==='ArrowLeft'){ tabs[(idx-1+tabs.length)%tabs.length].focus(); }
-  });
+/* ---------- MODAL ---------- */
+const overlay = document.getElementById('overlay');
+const modalTitle = document.getElementById('modalTitle');
+const modalSubtitle = document.getElementById('modalSubtitle');
+const modalBody = document.getElementById('modalBody');
+const modalImage = document.getElementById('modalImage');
+const modalExtra = document.getElementById('modalExtra');
+const modalClose = document.getElementById('modalClose');
+
+function openModal(type, title, body, opts={}){
+  modalTitle.textContent = title;
+  modalBody.textContent = body || '';
+  modalSubtitle.textContent = opts.subtitle || '';
+  modalExtra.innerHTML = '';
+
+  if(opts.image){
+    modalImage.src = opts.image;
+    modalImage.style.display = 'block';
+    modalImage.onerror = ()=> { modalImage.style.display='none'; }; // hide if not found
+  } else {
+    modalImage.style.display='none';
+  }
+
+  // special: contact form when about/contact opened
+  if(type === 'contact'){
+    modalExtra.innerHTML = `
+      <div style="margin-top:10px" class="contact-grid">
+        <div>
+          <input id="cname" placeholder="Your name">
+          <input id="cemail" placeholder="Your email">
+          <textarea id="cmsg" placeholder="Message..." rows="4"></textarea>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:center">
+          <button class="btn" id="sendContact">Send</button>
+        </div>
+      </div>`;
+    document.getElementById('sendContact').addEventListener('click', ()=>{
+      alert('Demo only: message UI only. Replace with real backend to send messages.');
+    });
+  }
+
+  overlay.style.display='flex';
+  overlay.setAttribute('aria-hidden','false');
+  // trap focus (basic)
+  modalClose.focus();
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(){
+  overlay.style.display='none';
+  overlay.setAttribute('aria-hidden','true');
+  document.body.style.overflow = '';
+}
+modalClose.addEventListener('click', closeModal);
+overlay.addEventListener('click', (e)=>{
+  if(e.target === overlay) closeModal(); // click outside modal closes
 });
+document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeModal(); });
+
+/* helper calls */
+function openAbout(){ openModal('about','About Project Turbo','Project Turbo is a student-run F1 in Schools team focusing on STEM, CAD/CAM, manufacturing, and outreach.'); }
+document.getElementById('openAbout').addEventListener('click', openAbout);
+
+/* show default view */
+showView('home');
+
+/* accessibility: keyboard for mobile menu open/close */
+hamburger.addEventListener('keydown', (e)=>{ if(e.key==='Enter') { hamburger.click(); } });
+
 </script>
 </body>
 </html>
