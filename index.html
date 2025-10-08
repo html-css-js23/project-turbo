@@ -72,7 +72,6 @@
     position:fixed;inset:0;display:none;align-items:center;justify-content:center;
     background:rgba(0,0,0,0.85);z-index:1400; /* Darker overlay for focus */
   }
-  .mobile-menu .panel{width:94%;max-width:420px;background:var(--panel);padding:22px;border-radius:14px}
   .mobile-menu .panel button{display:block;width:100%;text-align:left;margin:10px 0;padding:14px;border-radius:10px;background:transparent;color:var(--white);border:1px solid rgba(255,255,255,0.03);font-weight:700}
 
   /* main area */
@@ -156,9 +155,14 @@
   .muted{color:var(--muted);font-size:14px}
   .small{font-size:13px;color:var(--muted)}
 
-  /* Responsive links (for email/phone) - Removed dashed underline */
-  a.link-item { color: inherit; text-decoration: none; border-bottom: 1px solid transparent; transition: color 200ms, border-color 200ms;}
-  a.link-item:hover { color: var(--white); border-color: var(--white); }
+  /* Responsive links (for email/phone) - FINAL FIX: Removed border-bottom, ensuring no underline */
+  a.link-item { 
+    color: inherit; 
+    text-decoration: none; /* ensures no text decoration */
+    border-bottom: none; /* ensures no bottom border is used as an underline replacement */
+    transition: color 200ms;
+  }
+  a.link-item:hover { color: var(--white); }
 
   /* responsive */
   @media (max-width:980px){
@@ -320,7 +324,6 @@ function showView(id){
   // update active nav
   document.querySelectorAll('.nav-link').forEach(n=>{
     n.classList.toggle('active', n.dataset.nav===id);
-    // Removed preventDefault here; now handled by global click listener below
   });
   
   // focus for a11y (important!)
@@ -355,8 +358,6 @@ hamburger.addEventListener('click', ()=>{
 });
 document.getElementById('mobileClose').addEventListener('click', closeMobileMenu);
 function closeMobileMenu(){ mobileMenu.style.display='none'; hamburger.classList.remove('active'); }
-
-/* quick buttons (now use the data-nav listener above) */
 
 /* open about modal from hero */
 document.getElementById('openAbout').addEventListener('click', ()=> openModal('about', 'About Project Turbo', 'Project Turbo is a student-run F1 in Schools team focusing on STEM, CAD/CAM, manufacturing, and outreach. Our goal is to promote engineering excellence and teamwork through the F1 in Schools competition.'));
