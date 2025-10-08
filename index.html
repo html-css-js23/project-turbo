@@ -46,6 +46,11 @@
       text-decoration: none;
       color: inherit; /* Inherit color unless specified otherwise by a class */
   }
+  
+  /* FIX: Remove focus outline on the main body container when page loads or is tabbed to */
+  body:focus-within, #main:focus {
+      outline: none;
+  }
 
 
   /* container */
@@ -100,7 +105,6 @@
     transform: translateY(18px);
     opacity: 0;
   }
-  /* Fix: Ensure quick links on Home page don't have underlines */
   .card a {
       text-decoration: none;
       color: inherit;
@@ -142,12 +146,26 @@
   .contact-grid input, .contact-grid textarea{width:100%;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);background:rgba(255,255,255,0.02);color:var(--white);
     transition: all 200ms ease-out;
   }
-  /* Custom focus style, removed default outline */
-  .contact-grid input:focus, .contact-grid textarea:focus,
-  .btn:focus, .card:focus, .nav-link:focus, .hamburger:focus, .mobile-menu .panel button:focus, .modal .close:focus, a:focus {
+  
+  /* FIX: Custom focus style for accessibility - Added border-radius to make it rounded */
+  .contact-grid input:focus, 
+  .contact-grid textarea:focus,
+  .btn:focus, 
+  .card:focus, 
+  .nav-link:focus, 
+  .hamburger:focus, 
+  .mobile-menu .panel button:focus, 
+  .modal .close:focus, 
+  a:focus {
     outline: none; /* Remove default browser outline */
-    box-shadow: 0 0 0 2px var(--accent), 0 0 0 4px rgba(229, 0, 158, 0.3); /* Custom focus ring */
+    box-shadow: 0 0 0 2px var(--accent), 0 0 0 4px rgba(229, 0, 158, 0.3); /* Custom pink focus ring */
+    border-radius: 6px; /* Apply rounded corners to the focus ring */
   }
+  /* Keep specific elements with their pre-defined border-radius if necessary, like the cards */
+  .card:focus, .nav-link:focus {
+      border-radius: 12px; /* Use the element's existing radius for visual consistency */
+  }
+
   /* Reset box-shadow for inputs/textareas to prevent double shadow */
   .contact-grid input:focus, .contact-grid textarea:focus {
     border-color:var(--accent);
