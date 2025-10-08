@@ -40,6 +40,13 @@
     display:flex;align-items:flex-start;justify-content:center;padding:22px;
     line-height:1.45;
   }
+  
+  /* Global Link Reset: Remove underline from all <a> tags */
+  a {
+      text-decoration: none;
+      color: inherit; /* Inherit color unless specified otherwise by a class */
+  }
+
 
   /* container */
   .wrap{
@@ -59,7 +66,6 @@
   .nav-link{
     padding:10px 14px;border-radius:12px;background:transparent;color:var(--muted);border:none;cursor:pointer;font-weight:700;font-family:Poppins;font-size:14px;
     transition:all .25s ease-out;
-    text-decoration: none; /* Removed underline from nav links */
   }
   .nav-link:hover{color:var(--white);transform:translateY(-2px);background:rgba(255,255,255,0.04)}
   .nav-link.active{color:var(--white);box-shadow:0 10px 28px rgba(115,41,148,0.08);border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.02)}
@@ -94,6 +100,12 @@
     transform: translateY(18px);
     opacity: 0;
   }
+  /* Fix: Ensure quick links on Home page don't have underlines */
+  .card a {
+      text-decoration: none;
+      color: inherit;
+  }
+  
   .card.visible{transform:none;opacity:1}
   .card:hover{transform:translateY(-6px);box-shadow:0 18px 48px rgba(0,0,0,0.6)}
   .avatar{width:76px;height:76px;border-radius:12px;display:grid;place-items:center;font-weight:800;font-size:20px;background:linear-gradient(135deg,#732994,#E5009E);color:var(--white);flex:0 0 76px}
@@ -132,7 +144,7 @@
   }
   /* Custom focus style, removed default outline */
   .contact-grid input:focus, .contact-grid textarea:focus,
-  .btn:focus, .card:focus, .nav-link:focus, .hamburger:focus, .mobile-menu .panel button:focus, .modal .close:focus {
+  .btn:focus, .card:focus, .nav-link:focus, .hamburger:focus, .mobile-menu .panel button:focus, .modal .close:focus, a:focus {
     outline: none; /* Remove default browser outline */
     box-shadow: 0 0 0 2px var(--accent), 0 0 0 4px rgba(229, 0, 158, 0.3); /* Custom focus ring */
   }
@@ -151,15 +163,8 @@
   }
   .btn:hover{transform:translateY(-1px); box-shadow:0 16px 40px rgba(115,41,148,0.2)}
 
-  /* utilities */
-  .muted{color:var(--muted);font-size:14px}
-  .small{font-size:13px;color:var(--muted)}
-
-  /* Responsive links (for email/phone) - FINAL FIX: Removed border-bottom, ensuring no underline */
+  /* Responsive links (for email/phone) */
   a.link-item { 
-    color: inherit; 
-    text-decoration: none; /* ensures no text decoration */
-    border-bottom: none; /* ensures no bottom border is used as an underline replacement */
     transition: color 200ms;
   }
   a.link-item:hover { color: var(--white); }
