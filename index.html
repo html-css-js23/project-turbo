@@ -261,7 +261,7 @@
         </a>
         <a class="card" id="quickSponsors" data-nav="sponsors" href="#" data-anim role="button">
           <div style="display:flex;align-items:center;gap:12px">
-            <div class="sponsor-logo">SP</div>
+            <div class="avatar">SP</div>
             <div><h3 style="margin:0;font-family:Poppins">Sponsors</h3><div class="muted">Our partners</div></div>
           </div>
         </a>
@@ -324,12 +324,12 @@
 <script>
 /* ---------- DATA ---------- */
 const TEAM = [
-  {name:"Harrison Ding", role:"Team Leader", photo:"headshots/harrison.jpg", bio:"Harrison leads Project Turbo and coordinates engineering and strategy."},
-  {name:"Alexander Verschueren", role:"Sponsorship & Tech Team", photo:"headshots/alexander.jpg", bio:"Handles sponsorship relationships and assists with technical systems."},
-  {name:"Eri Omonigho", role:"Sponsorship Team", photo:"headshots/eri.jpg", bio:"Manages sponsor communications and outreach."},
-  {name:"Ana Macário", role:"Team Identity & Branding", photo:"headshots/ana.jpg", bio:"Leads visual identity, branding, and team presence."},
-  {name:"Artem", role:"Team Identity", photo:"headshots/artem.jpg", bio:"Supports branding, graphics, and presentation design."},
-  {name:"Member Coming Soon", role:"Placeholder", photo:"", bio:"We will announce this member shortly."}
+  {name:"Harrison Ding", role:"Team Leader", photo:"harrison.jpg", bio:"Harrison leads Project Turbo and coordinates engineering and strategy."},
+  {name:"Alexander Verschueren", role:"Sponsorship & Tech Team", photo:"alexander.jpg", bio:"Handles sponsorship relationships and assists with technical systems."},
+  {name:"Eri Omonigho", role:"Sponsorship Team", photo:"eri.jpg", bio:"Manages sponsor communications and outreach."},
+  {name:"Ana Macário", role:"Team Identity & Branding", photo:"ana.jpg", bio:"Leads visual identity, branding, and team presence."},
+  {name:"Artem", role:"Team Identity", photo:"artem.jpg", bio:"Supports branding, graphics, and presentation design."},
+  {name:"Haniyah Khan", role:"Car Engineer", photo:"haniyah.jpg", bio:"Manages designing the car for our team."}
 ];
 
 const SPONSORS = [
@@ -460,7 +460,7 @@ function openModal(type, title, body, opts={}){
     // Add form submission handler
     document.querySelector('.contact-grid').addEventListener('submit', (e) => {
       e.preventDefault();
-      alert('Demo only: Message sent! Replace this with real backend logic to send messages.');
+      alert('This system does not work.');
       closeModal();
     });
   }
